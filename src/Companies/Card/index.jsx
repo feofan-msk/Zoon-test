@@ -191,6 +191,9 @@ class Card extends Component {
         </div>
 
         <S.RightSide>
+        <S.Menu>
+          
+        </S.Menu>
           <S.MenuIcon />
 
           <div>

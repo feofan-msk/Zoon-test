@@ -25,6 +25,13 @@ S.Card = styled.section`
     `}
 `;
 
+S.Text = styled.span`
+  color: #bbbcc4;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+`;
+
 S.Title = styled.h3`
   display: inline-block;
   margin: 0 0 10px;
@@ -40,12 +47,7 @@ S.Title = styled.h3`
     `};
 `;
 
-S.Status = styled.span`
-  color: #bbbcc4;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 20px;
-
+S.Status = styled(S.Text)`
   ::before {
     content: "\00a0\00a0•\00a0\00a0";
   }
@@ -94,12 +96,8 @@ S.Tag = styled.div`
     `}
 `;
 
-S.Rating = styled.span`
+S.Rating = styled(S.Text)`
   margin-left: 4px;
-  font-size: 13px;
-  line-height: 20px;
-  color: #bbbcc4;
-  font-weight: 400;
 
   ${props =>
     props.isRated &&
@@ -109,11 +107,8 @@ S.Rating = styled.span`
     `}
 `;
 
-S.Comments = styled.span`
+S.Comments = styled(S.Text)`
   color: #222222;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 20px;
 
   ::before {
     content: "\00a0\00a0•\00a0\00a0";
@@ -206,7 +201,7 @@ class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActive: false
+      isActive: true
     };
 
     this.handleStatusChange = this.handleStatusChange.bind(this);
@@ -220,39 +215,50 @@ class Card extends Component {
 
   render() {
     return (
-      <S.Card className={this.props.className} isActive={this.state.isActive}>
+      <S.Card
+        className={this.props.className}
+        isActive={this.state.isActive && !this.props.isLoading}
+      >
         <div>
           <S.Title isActive={this.state.isActive}>{this.props.title}</S.Title>
 
           {this.state.isActive ? (
             <span>
-              {this.props.statuses.map(status => (
-                <S.Status key={status}>{status}</S.Status>
-              ))}
+              {this.props.statuses &&
+                this.props.statuses.map(status => (
+                  <S.Status key={status}>{status}</S.Status>
+                ))}
 
               <br />
 
               <S.TagsList>
-                {this.props.tags.map(tag => (
-                  <S.Tag isLoading={tag.isLoading} key={tag.text}>
-                    {tag.text}
-                  </S.Tag>
-                ))}
+                {this.props.tags &&
+                  this.props.tags.map(tag => (
+                    <S.Tag isLoading={tag.isLoading} key={tag.text}>
+                      {tag.text}
+                    </S.Tag>
+                  ))}
               </S.TagsList>
 
-              <StarIcon fill={this.props.rating ? "#ffaa30" : "#cedae6"} />
+              {this.props.isLoading ? (
+                <S.Text>Поиск заведений: 15 из 78…</S.Text>
+              ) : (
+                <span>
+                  <StarIcon fill={this.props.rating ? "#ffaa30" : "#cedae6"} />
 
-              <S.Rating isRated={!!this.props.rating}>
-                {this.props.rating
-                  ? `${this.props.rating} из 5`
-                  : "Портал без рейтинга"}
-              </S.Rating>
+                  <S.Rating isRated={!!this.props.rating}>
+                    {this.props.rating
+                      ? `${this.props.rating} из 5`
+                      : "Портал без рейтинга"}
+                  </S.Rating>
 
-              {this.props.comments && (
-                <S.Comments>
-                  {this.props.comments[0]} отзывов, {this.props.comments[1]}{" "}
-                  неотвеченных
-                </S.Comments>
+                  {this.props.comments && (
+                    <S.Comments>
+                      {this.props.comments[0]} отзывов, {this.props.comments[1]}{" "}
+                      неотвеченных
+                    </S.Comments>
+                  )}
+                </span>
               )}
             </span>
           ) : (

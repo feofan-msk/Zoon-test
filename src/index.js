@@ -7,6 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 
 const COMPANIES = [
   {
+    isLoading: false,
     title: "Google",
     statuses: ["все 30 заведений настроены"],
     tags: [
@@ -37,6 +38,7 @@ const COMPANIES = [
     updates: 2
   },
   {
+    isLoading: false,
     title: "Shmoogle",
     statuses: ["все 30 заведений настроены", "4 настроено", "20 в поиске"],
     tags: [
@@ -59,6 +61,21 @@ const COMPANIES = [
       {
         text: "Акции",
         isLoading: false
+      }
+    ],
+    rating: null,
+    comments: null,
+    needActions: true,
+    updates: 0
+  },
+  {
+    isLoading: true,
+    title: "2Gis",
+    statuses: null,
+    tags: [
+      {
+        text: "Создаём 3 страницы",
+        isLoading: true
       }
     ],
     rating: null,

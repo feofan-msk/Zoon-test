@@ -17,6 +17,7 @@ class Companies extends Component {
       <section>
         {companies.map(company => (
           <S.Card
+            isLoading={company.isLoading}
             title={company.title}
             statuses={company.statuses}
             tags={company.tags}

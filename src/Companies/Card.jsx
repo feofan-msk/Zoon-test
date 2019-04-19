@@ -6,7 +6,7 @@ import processingIcon from "../assets/processing.svg";
 import StarIcon from "./StarIcon";
 
 const S = {};
-S.Card = styled.div`
+S.Card = styled.section`
   padding: 16px 18px 12px 30px;
   border-radius: 4px;
   border: 1px solid #e6ecf2;

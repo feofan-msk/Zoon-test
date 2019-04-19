@@ -4,13 +4,13 @@ import styled from "styled-components";
 const S = {};
 S.Card = styled.div`
   flex: 1 1 25%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
   padding: 16px 14px 16px 26px;
   border-radius: 4px;
   background-color: #4a0594;
+  background-image: ${props => `url(${props.background})`};
+  background-repeat: no-repeat;
+  background-position: top 18px right 18px;
   color: #ffffff;
   overflow-wrap: anywhere;
   cursor: pointer;
@@ -32,20 +32,12 @@ S.Description = styled.p`
   font-weight: 400;
 `;
 
-S.Icon = styled.img`
-  align-self: flex-start;
-`;
-
 class Card extends Component {
   render() {
     return (
-      <S.Card>
-        <div>
-          <S.Title>{this.props.number}</S.Title>
-          <S.Description>{this.props.description}</S.Description>
-        </div>
-
-        <S.Icon src={this.props.icon} alt="card icon" />
+      <S.Card background={this.props.icon}>
+        <S.Title>{this.props.number}</S.Title>
+        <S.Description>{this.props.description}</S.Description>
       </S.Card>
     );
   }

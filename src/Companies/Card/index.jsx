@@ -16,7 +16,13 @@ S.Card = styled.section`
   border-radius: 4px;
   border: 1px solid #e6ecf2;
   background-color: #ffffff;
-  border-left: 4px solid #5a39a7;
+  border-left: 4px solid #cedae6;
+
+  ${props =>
+    props.isActive &&
+    css`
+      border-left: 4px solid #5a39a7;
+    `}
 `;
 
 S.Title = styled.h3`
@@ -25,6 +31,13 @@ S.Title = styled.h3`
   font-size: 16px;
   font-weight: 700;
   line-height: 25px;
+  color: #bbbcc4;
+
+  ${props =>
+    props.isActive &&
+    css`
+      color: #222222;
+    `};
 `;
 
 S.Status = styled.span`
@@ -181,55 +194,90 @@ S.Tooltip = styled.div`
   }
 `;
 
+S.CardStatus = styled.p`
+  margin: 0;
+  color: #bbbcc4;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+`;
+
 class Card extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isActive: false
+    };
+
+    this.handleStatusChange = this.handleStatusChange.bind(this);
+  }
+
+  handleStatusChange() {
+    this.setState(({ isActive }) => ({
+      isActive: !isActive
+    }));
+  }
+
   render() {
     return (
-      <S.Card className={this.props.className}>
+      <S.Card className={this.props.className} isActive={this.state.isActive}>
         <div>
-          <S.Title>{this.props.title}</S.Title>
+          <S.Title isActive={this.state.isActive}>{this.props.title}</S.Title>
 
-          {this.props.statuses.map(status => (
-            <S.Status key={status}>{status}</S.Status>
-          ))}
+          {this.state.isActive ? (
+            <span>
+              {this.props.statuses.map(status => (
+                <S.Status key={status}>{status}</S.Status>
+              ))}
 
-          <br />
+              <br />
 
-          <S.TagsList>
-            {this.props.tags.map(tag => (
-              <S.Tag isLoading={tag.isLoading} key={tag.text}>
-                {tag.text}
-              </S.Tag>
-            ))}
-          </S.TagsList>
+              <S.TagsList>
+                {this.props.tags.map(tag => (
+                  <S.Tag isLoading={tag.isLoading} key={tag.text}>
+                    {tag.text}
+                  </S.Tag>
+                ))}
+              </S.TagsList>
 
-          <StarIcon fill={this.props.rating ? "#ffaa30" : "#cedae6"} />
+              <StarIcon fill={this.props.rating ? "#ffaa30" : "#cedae6"} />
 
-          <S.Rating isRated={!!this.props.rating}>
-            {this.props.rating
-              ? `${this.props.rating} из 5`
-              : "Портал без рейтинга"}
-          </S.Rating>
+              <S.Rating isRated={!!this.props.rating}>
+                {this.props.rating
+                  ? `${this.props.rating} из 5`
+                  : "Портал без рейтинга"}
+              </S.Rating>
 
-          {this.props.comments && (
-            <S.Comments>
-              {this.props.comments[0]} отзывов, {this.props.comments[1]}{" "}
-              неотвеченных
-            </S.Comments>
+              {this.props.comments && (
+                <S.Comments>
+                  {this.props.comments[0]} отзывов, {this.props.comments[1]}{" "}
+                  неотвеченных
+                </S.Comments>
+              )}
+            </span>
+          ) : (
+            <S.CardStatus>Площадка отключена</S.CardStatus>
           )}
         </div>
 
         <S.RightSide>
           <Menu>
-            <S.Tooltip>Включить</S.Tooltip>
+            <S.Tooltip onClick={this.handleStatusChange}>
+              {this.state.isActive ? "Отключить" : "Включить"}
+            </S.Tooltip>
           </Menu>
 
-          <div>
-            {!!this.props.updates && (
-              <S.UpdateMessage>{this.props.updates} обновления</S.UpdateMessage>
-            )}
+          {this.state.isActive && (
+            <div>
+              {!!this.props.updates && (
+                <S.UpdateMessage>
+                  {this.props.updates} обновления
+                </S.UpdateMessage>
+              )}
 
-            {this.props.needActions && <S.Badge>Требует действий</S.Badge>}
-          </div>
+              {this.props.needActions && <S.Badge>Требует действий</S.Badge>}
+            </div>
+          )}
         </S.RightSide>
       </S.Card>
     );

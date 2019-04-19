@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
 
-import tickIcon from "../assets/tick.svg";
-import processingIcon from "../assets/processing.svg";
+import tickIcon from "../../assets/tick.svg";
+import processingIcon from "../../assets/processing.svg";
 import StarIcon from "./StarIcon";
-import bellIcon from "../assets/bell.svg";
-import MenuIcon from "./MenuIcon";
+import bellIcon from "../../assets/bell.svg";
+import Menu from "./Menu";
 
 const S = {};
 S.Card = styled.section`
@@ -140,17 +140,45 @@ S.Badge = styled.div`
   }
 `;
 
-S.MenuIcon = styled(MenuIcon)`
-  :hover path {
-    fill: #5a39a7;
-  }
-`;
-
 S.UpdateMessage = styled.p`
   color: #694caf;
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
+`;
+
+S.Tooltip = styled.div`
+  padding: 10px 20px;
+  border: 1px solid #e8e8e8;
+  background-color: #ffffff;
+  border-radius: 3px;
+
+  color: #694caf;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  cursor: pointer;
+
+  ::after {
+    content: " ";
+    position: absolute;
+    bottom: 97%;
+    right: 29px;
+    border-width: 11px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+  }
+
+  ::before {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    right: 29px;
+    border-width: 11px;
+    border-style: solid;
+    border-color: transparent transparent #e8e8e8 transparent;
+  }
 `;
 
 class Card extends Component {
@@ -191,10 +219,9 @@ class Card extends Component {
         </div>
 
         <S.RightSide>
-        <S.Menu>
-          
-        </S.Menu>
-          <S.MenuIcon />
+          <Menu>
+            <S.Tooltip>Включить</S.Tooltip>
+          </Menu>
 
           <div>
             {!!this.props.updates && (

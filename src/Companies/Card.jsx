@@ -4,10 +4,15 @@ import styled, { css } from "styled-components";
 import tickIcon from "../assets/tick.svg";
 import processingIcon from "../assets/processing.svg";
 import StarIcon from "./StarIcon";
+import bellIcon from "../assets/bell.svg";
+import MenuIcon from "./MenuIcon";
 
 const S = {};
 S.Card = styled.section`
+  display: flex;
+  justify-content: space-between;
   padding: 16px 18px 12px 30px;
+
   border-radius: 4px;
   border: 1px solid #e6ecf2;
   background-color: #ffffff;
@@ -102,40 +107,100 @@ S.Comments = styled.span`
   }
 `;
 
+S.RightSide = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  text-align: right;
+`;
+
+S.Badge = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background-color: #ffaa30;
+
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+
+  ::before {
+    display: inline-block;
+    content: "";
+    width: 12px;
+    height: 16px;
+    margin-right: 4px;
+
+    background-image: url(${bellIcon});
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+`;
+
+S.MenuIcon = styled(MenuIcon)`
+  :hover path {
+    fill: #5a39a7;
+  }
+`;
+
+S.UpdateMessage = styled.p`
+  color: #694caf;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+`;
+
 class Card extends Component {
   render() {
     return (
       <S.Card className={this.props.className}>
-        <S.Title>{this.props.title}</S.Title>
+        <div>
+          <S.Title>{this.props.title}</S.Title>
 
-        {this.props.statuses.map(status => (
-          <S.Status key={status}>{status}</S.Status>
-        ))}
-
-        <br />
-
-        <S.TagsList>
-          {this.props.tags.map(tag => (
-            <S.Tag isLoading={tag.isLoading} key={tag.text}>
-              {tag.text}
-            </S.Tag>
+          {this.props.statuses.map(status => (
+            <S.Status key={status}>{status}</S.Status>
           ))}
-        </S.TagsList>
 
-        <StarIcon fill={this.props.rating ? "#ffaa30" : "#cedae6"} />
+          <br />
 
-        <S.Rating isRated={!!this.props.rating}>
-          {this.props.rating
-            ? `${this.props.rating} из 5`
-            : "Портал без рейтинга"}
-        </S.Rating>
+          <S.TagsList>
+            {this.props.tags.map(tag => (
+              <S.Tag isLoading={tag.isLoading} key={tag.text}>
+                {tag.text}
+              </S.Tag>
+            ))}
+          </S.TagsList>
 
-        {this.props.comments && (
-          <S.Comments>
-            {this.props.comments[0]} отзывов, {this.props.comments[1]}{" "}
-            неотвеченных
-          </S.Comments>
-        )}
+          <StarIcon fill={this.props.rating ? "#ffaa30" : "#cedae6"} />
+
+          <S.Rating isRated={!!this.props.rating}>
+            {this.props.rating
+              ? `${this.props.rating} из 5`
+              : "Портал без рейтинга"}
+          </S.Rating>
+
+          {this.props.comments && (
+            <S.Comments>
+              {this.props.comments[0]} отзывов, {this.props.comments[1]}{" "}
+              неотвеченных
+            </S.Comments>
+          )}
+        </div>
+
+        <S.RightSide>
+          <S.MenuIcon />
+
+          <div>
+            {!!this.props.updates && (
+              <S.UpdateMessage>{this.props.updates} обновления</S.UpdateMessage>
+            )}
+
+            {this.props.needActions && <S.Badge>Требует действий</S.Badge>}
+          </div>
+        </S.RightSide>
       </S.Card>
     );
   }

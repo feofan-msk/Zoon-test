@@ -22,6 +22,8 @@ class Companies extends Component {
             tags={company.tags}
             rating={company.rating}
             comments={company.comments}
+            needActions={company.needActions}
+            updates={company.updates}
             key={company.title}
           />
         ))}

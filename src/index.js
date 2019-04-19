@@ -32,7 +32,9 @@ const COMPANIES = [
       }
     ],
     rating: 4.5,
-    comments: [198, 15]
+    comments: [198, 15],
+    needActions: false,
+    updates: 2
   },
   {
     title: "Shmoogle",
@@ -60,7 +62,9 @@ const COMPANIES = [
       }
     ],
     rating: null,
-    comments: null
+    comments: null,
+    needActions: true,
+    updates: 0
   }
 ];
 

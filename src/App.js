@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import Dashboard from "./Dashboard";
+import Companies from "./Companies";
 
 const S = {};
 S.App = styled.div`
@@ -14,6 +15,8 @@ class App extends Component {
     return (
       <S.App>
         <Dashboard />
+
+        <Companies companies={this.props.companies} />
       </S.App>
     );
   }

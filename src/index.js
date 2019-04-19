@@ -59,8 +59,8 @@ const COMPANIES = [
         isLoading: false
       }
     ],
-    rating: 4.5,
-    comments: [198, 15]
+    rating: null,
+    comments: null
   }
 ];
 

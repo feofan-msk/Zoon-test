@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 import tickIcon from "../assets/tick.svg";
 import processingIcon from "../assets/processing.svg";
+import StarIcon from "./StarIcon";
 
 const S = {};
 S.Card = styled.div`
@@ -34,6 +35,7 @@ S.Status = styled.span`
 
 S.TagsList = styled.div`
   display: flex;
+  margin-bottom: 20px;
 `;
 
 S.Tag = styled.div`
@@ -45,7 +47,6 @@ S.Tag = styled.div`
   border: 1px solid #e6ecf2;
 
   color: #222222;
-  font-family: Roboto;
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
@@ -75,6 +76,32 @@ S.Tag = styled.div`
     `}
 `;
 
+S.Rating = styled.span`
+  margin-left: 4px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #bbbcc4;
+  font-weight: 400;
+
+  ${props =>
+    props.isRated &&
+    css`
+      color: #ffaa30;
+      font-weight: 700;
+    `}
+`;
+
+S.Comments = styled.span`
+  color: #222222;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+
+  ::before {
+    content: "\00a0\00a0•\00a0\00a0";
+  }
+`;
+
 class Card extends Component {
   render() {
     return (
@@ -82,16 +109,33 @@ class Card extends Component {
         <S.Title>{this.props.title}</S.Title>
 
         {this.props.statuses.map(status => (
-          <S.Status>{status}</S.Status>
+          <S.Status key={status}>{status}</S.Status>
         ))}
 
         <br />
 
         <S.TagsList>
           {this.props.tags.map(tag => (
-            <S.Tag isLoading={tag.isLoading}> {tag.text} </S.Tag>
+            <S.Tag isLoading={tag.isLoading} key={tag.text}>
+              {tag.text}
+            </S.Tag>
           ))}
         </S.TagsList>
+
+        <StarIcon fill={this.props.rating ? "#ffaa30" : "#cedae6"} />
+
+        <S.Rating isRated={!!this.props.rating}>
+          {this.props.rating
+            ? `${this.props.rating} из 5`
+            : "Портал без рейтинга"}
+        </S.Rating>
+
+        {this.props.comments && (
+          <S.Comments>
+            {this.props.comments[0]} отзывов, {this.props.comments[1]}{" "}
+            неотвеченных
+          </S.Comments>
+        )}
       </S.Card>
     );
   }

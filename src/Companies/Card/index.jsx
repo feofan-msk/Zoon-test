@@ -194,7 +194,7 @@ S.Tooltip = styled.div`
   }
 `;
 
-S.Status = styled.p`
+S.CardStatus = styled.p`
   margin: 0;
   color: #bbbcc4;
   font-size: 13px;

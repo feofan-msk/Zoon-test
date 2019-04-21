@@ -2,10 +2,12 @@ import React from "react";
 import { Flex } from "@rebass/grid";
 
 import Card from "./Card";
-import commentIcon from "../assets/comment-cloud.svg";
-import unansweredCommentIcon from "../assets/unanswered-comment.svg";
-import updateIcon from "../assets/update.svg";
-import starIcon from "../assets/star.svg";
+import {
+  commentIcon,
+  unansweredCommentIcon,
+  updateIcon,
+  starIcon
+} from "../shared/assets";
 
 const S = {};
 

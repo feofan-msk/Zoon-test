@@ -214,48 +214,54 @@ class Card extends Component {
   }
 
   render() {
+    const {
+      className,
+      title,
+      statuses,
+      tags,
+      isLoading,
+      rating,
+      comments,
+      updates,
+      needActions
+    } = this.props;
+    const { isActive } = this.state;
     return (
-      <S.Card
-        className={this.props.className}
-        isActive={this.state.isActive && !this.props.isLoading}
-      >
+      <S.Card className={className} isActive={isActive && !isLoading}>
         <div>
-          <S.Title isActive={this.state.isActive}>{this.props.title}</S.Title>
+          <S.Title isActive={isActive}>{title}</S.Title>
 
-          {this.state.isActive ? (
+          {isActive ? (
             <span>
-              {this.props.statuses &&
-                this.props.statuses.map(status => (
+              {statuses &&
+                statuses.map(status => (
                   <S.Status key={status}>{status}</S.Status>
                 ))}
 
               <br />
 
               <S.TagsList>
-                {this.props.tags &&
-                  this.props.tags.map(tag => (
+                {tags &&
+                  tags.map(tag => (
                     <S.Tag isLoading={tag.isLoading} key={tag.text}>
                       {tag.text}
                     </S.Tag>
                   ))}
               </S.TagsList>
 
-              {this.props.isLoading ? (
+              {isLoading ? (
                 <S.Text>Поиск заведений: 15 из 78…</S.Text>
               ) : (
                 <span>
-                  <StarIcon fill={this.props.rating ? "#ffaa30" : "#cedae6"} />
+                  <StarIcon fill={rating ? "#ffaa30" : "#cedae6"} />
 
-                  <S.Rating isRated={!!this.props.rating}>
-                    {this.props.rating
-                      ? `${this.props.rating} из 5`
-                      : "Портал без рейтинга"}
+                  <S.Rating isRated={!!rating}>
+                    {rating ? `${rating} из 5` : "Портал без рейтинга"}
                   </S.Rating>
 
-                  {this.props.comments && (
+                  {comments && (
                     <S.Comments>
-                      {this.props.comments[0]} отзывов, {this.props.comments[1]}{" "}
-                      неотвеченных
+                      {comments[0]} отзывов, {comments[1]} неотвеченных
                     </S.Comments>
                   )}
                 </span>
@@ -269,19 +275,17 @@ class Card extends Component {
         <S.RightSide>
           <Menu>
             <S.Tooltip onClick={this.handleStatusChange}>
-              {this.state.isActive ? "Отключить" : "Включить"}
+              {isActive ? "Отключить" : "Включить"}
             </S.Tooltip>
           </Menu>
 
-          {this.state.isActive && (
+          {isActive && (
             <div>
-              {!!this.props.updates && (
-                <S.UpdateMessage>
-                  {this.props.updates} обновления
-                </S.UpdateMessage>
+              {!!updates && (
+                <S.UpdateMessage>{updates} обновления</S.UpdateMessage>
               )}
 
-              {this.props.needActions && <S.Badge>Требует действий</S.Badge>}
+              {needActions && <S.Badge>Требует действий</S.Badge>}
             </div>
           )}
         </S.RightSide>

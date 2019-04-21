@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import Dashboard from "./Dashboard";
@@ -10,16 +10,12 @@ S.App = styled.div`
   background: white;
 `;
 
-class App extends Component {
-  render() {
-    return (
-      <S.App>
-        <Dashboard />
+const App = ({ companies }) => (
+  <S.App>
+    <Dashboard />
 
-        <Companies companies={this.props.companies} />
-      </S.App>
-    );
-  }
-}
+    <Companies companies={companies} />
+  </S.App>
+);
 
 export default App;

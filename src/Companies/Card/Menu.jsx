@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import MenuIcon from "./MenuIcon";
@@ -28,15 +28,11 @@ S.Children = styled.div`
   }
 `;
 
-class Menu extends Component {
-  render() {
-    return (
-      <S.Menu>
-        <S.MenuIcon />
-        <S.Children>{this.props.children}</S.Children>
-      </S.Menu>
-    );
-  }
-}
+const Menu = ({ children }) => (
+  <S.Menu>
+    <S.MenuIcon />
+    <S.Children>{children}</S.Children>
+  </S.Menu>
+);
 
 export default Menu;

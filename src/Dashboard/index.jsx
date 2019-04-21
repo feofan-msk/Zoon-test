@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import Card from "./Card";
@@ -13,21 +13,17 @@ S.Dashboard = styled.section`
   margin-bottom: 36px;
 `;
 
-class Dashboard extends Component {
-  render() {
-    return (
-      <S.Dashboard>
-        <Card number={165} description="отзывов" icon={commentIcon} />
-        <Card
-          number={21}
-          description="неотвеченный отзыв"
-          icon={unansweredCommentIcon}
-        />
-        <Card number={50} description="обновлений" icon={updateIcon} />
-        <Card number={4.5} description="средний рейтинг" icon={starIcon} />
-      </S.Dashboard>
-    );
-  }
-}
+const Dashboard = () => (
+  <S.Dashboard>
+    <Card number={165} description="отзывов" icon={commentIcon} />
+    <Card
+      number={21}
+      description="неотвеченный отзыв"
+      icon={unansweredCommentIcon}
+    />
+    <Card number={50} description="обновлений" icon={updateIcon} />
+    <Card number={4.5} description="средний рейтинг" icon={starIcon} />
+  </S.Dashboard>
+);
 
 export default Dashboard;

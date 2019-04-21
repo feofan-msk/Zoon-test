@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const S = {};
@@ -32,15 +32,11 @@ S.Description = styled.p`
   font-weight: 400;
 `;
 
-class Card extends Component {
-  render() {
-    return (
-      <S.Card background={this.props.icon}>
-        <S.Title>{this.props.number}</S.Title>
-        <S.Description>{this.props.description}</S.Description>
-      </S.Card>
-    );
-  }
-}
+const Card = ({ number, icon, description }) => (
+  <S.Card background={icon}>
+    <S.Title>{number}</S.Title>
+    <S.Description>{description}</S.Description>
+  </S.Card>
+);
 
 export default Card;

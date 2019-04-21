@@ -134,6 +134,11 @@ S.Badge = styled.div`
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
+  cursor: pointer;
+
+  :hover {
+    background-color: #e8a920;
+  }
 
   ::before {
     display: inline-block;
@@ -189,7 +194,7 @@ S.Tooltip = styled.div`
   }
 `;
 
-S.CardStatus = styled.p`
+S.Status = styled.p`
   margin: 0;
   color: #bbbcc4;
   font-size: 13px;

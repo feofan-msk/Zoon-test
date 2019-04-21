@@ -16,7 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "precommit": "eslint src --ext=js,jsx"
+    "precommit": "eslint src --ext=js,jsx",
+    "deploy": "yarn build && now build"
   },
   "eslintConfig": {
     "extends": "react-app"

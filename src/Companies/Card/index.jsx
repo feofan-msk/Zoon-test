@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
+import { space, display } from "styled-system";
 
 import tickIcon from "../../assets/tick.svg";
 import processingIcon from "../../assets/processing.svg";
@@ -9,9 +10,9 @@ import Menu from "./Menu";
 
 const S = {};
 S.Card = styled.section`
+  ${space}
   display: flex;
   justify-content: space-between;
-  padding: 16px 18px 12px 30px;
 
   border-radius: 4px;
   border: 1px solid #e6ecf2;
@@ -33,7 +34,7 @@ S.Text = styled.span`
 `;
 
 S.Title = styled.h3`
-  display: inline-block;
+  ${display}
   margin: 0 0 10px;
   font-size: 16px;
   font-weight: 700;
@@ -47,7 +48,13 @@ S.Title = styled.h3`
     `};
 `;
 
+S.StatusesList = styled.div`
+  display: inline-block;
+  margin: 0 0 10px;
+`;
+
 S.Status = styled(S.Text)`
+  display: inline-block;
   ::before {
     content: "\00a0\00a0•\00a0\00a0";
   }
@@ -55,6 +62,7 @@ S.Status = styled(S.Text)`
 
 S.TagsList = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 `;
 
@@ -62,6 +70,7 @@ S.Tag = styled.div`
   display: flex;
   align-items: center;
 
+  margin: 5px;
   padding: 4px 10px;
   border-radius: 4px;
   border: 1px solid #e6ecf2;
@@ -81,10 +90,6 @@ S.Tag = styled.div`
     background-image: url(${tickIcon});
     background-repeat: no-repeat;
     background-size: contain;
-  }
-
-  & + & {
-    margin-left: 10px;
   }
 
   ${props =>
@@ -108,6 +113,7 @@ S.Rating = styled(S.Text)`
 `;
 
 S.Comments = styled(S.Text)`
+  ${display}
   color: #222222;
 
   ::before {
@@ -154,6 +160,7 @@ S.Badge = styled.div`
 `;
 
 S.UpdateMessage = styled.p`
+  margin: 0;
   color: #694caf;
   font-size: 13px;
   font-weight: 400;
@@ -194,12 +201,20 @@ S.Tooltip = styled.div`
   }
 `;
 
-S.Status = styled.p`
+S.CardStatus = styled.p`
   margin: 0;
   color: #bbbcc4;
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
+`;
+
+S.Box = styled.div`
+  ${display}
+
+  * + * {
+    margin-top: 10px;
+  }
 `;
 
 class Card extends Component {
@@ -232,16 +247,28 @@ class Card extends Component {
     } = this.props;
     const { isActive } = this.state;
     return (
-      <S.Card className={className} isActive={isActive && !isLoading}>
+      <S.Card
+        p={["10px", null, "20px"]}
+        pl={["16px", null, "26px"]}
+        className={className}
+        isActive={isActive && !isLoading}
+      >
         <div>
-          <S.Title isActive={isActive}>{title}</S.Title>
+          <S.Title
+            display={["block", null, "inline-block"]}
+            isActive={isActive}
+          >
+            {title}
+          </S.Title>
 
           {isActive ? (
             <span>
-              {statuses &&
-                statuses.map(status => (
-                  <S.Status key={status}>{status}</S.Status>
-                ))}
+              <S.StatusesList>
+                {statuses &&
+                  statuses.map(status => (
+                    <S.Status key={status}>{status}</S.Status>
+                  ))}
+              </S.StatusesList>
 
               <br />
 
@@ -265,7 +292,7 @@ class Card extends Component {
                   </S.Rating>
 
                   {comments && (
-                    <S.Comments>
+                    <S.Comments display={["none", "initial"]}>
                       {comments[0]} отзывов, {comments[1]} неотвеченных
                     </S.Comments>
                   )}
@@ -285,13 +312,13 @@ class Card extends Component {
           </Menu>
 
           {isActive && (
-            <div>
+            <S.Box display={["none", null, "initial"]}>
               {!!updates && (
-                <S.UpdateMessage>{updates} обновления</S.UpdateMessage>
+                <S.UpdateMessage>{updates}&nbsp;обновления</S.UpdateMessage>
               )}
 
               {needActions && <S.Badge>Требует действий</S.Badge>}
-            </div>
+            </S.Box>
           )}
         </S.RightSide>
       </S.Card>

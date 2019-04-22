@@ -5,6 +5,7 @@ import MenuIcon from "./MenuIcon";
 
 const S = {};
 S.MenuIcon = styled(MenuIcon)`
+  box-sizing: content-box;
   padding: 6px;
   z-index: 1;
   position: relative;

@@ -22,7 +22,7 @@ S.Card = props => (
 );
 
 const Dashboard = () => (
-  <Flex m={-1} mb={5} flexWrap={["wrap", null, "nowrap"]}>
+  <Flex as="section" m={-1} mb={5} flexWrap={["wrap", null, "nowrap"]}>
     <S.Card number={165} description="отзывов" icon={commentIcon} />
     <S.Card
       number={21}

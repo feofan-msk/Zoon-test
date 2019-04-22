@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { Box } from "@rebass/grid";
 
 const S = {};
-S.Card = styled.div`
-  flex: 0 0 calc(25% - 4px);
+S.Card = styled(Box)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 2px;
   padding: 20px;
   padding-right: 80px;
 
@@ -33,11 +32,14 @@ S.Description = styled.p`
   font-weight: 400;
 `;
 
-const Card = ({ number, icon, description }) => (
-  <S.Card background={icon}>
-    <S.Title>{number}</S.Title>
-    <S.Description>{description}</S.Description>
-  </S.Card>
-);
+const Card = props => {
+  const { icon, number, description } = props;
+  return (
+    <S.Card {...props} background={icon}>
+      <S.Title>{number}</S.Title>
+      <S.Description>{description}</S.Description>
+    </S.Card>
+  );
+};
 
 export default Card;

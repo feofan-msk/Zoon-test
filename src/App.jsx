@@ -13,12 +13,13 @@ S.App = styled(Box)`
 `;
 
 const theme = {
-  breakpoints: ["60em"]
+  breakpoints: ["30em", "60em"],
+  space: [0, 2, 4, 8, 16, 32, 64, 128, 256, 512]
 };
 
 const App = ({ companies }) => (
   <ThemeProvider theme={theme}>
-    <S.App pt={[2, 4]} px={[2, 5]}>
+    <S.App pt={[3, null, 5]} px={[3, null, 6]}>
       <Dashboard />
 
       <Companies companies={companies} />

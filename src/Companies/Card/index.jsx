@@ -160,6 +160,7 @@ S.Badge = styled.div`
 `;
 
 S.UpdateMessage = styled.p`
+  margin: 0;
   color: #694caf;
   font-size: 13px;
   font-weight: 400;
@@ -210,6 +211,10 @@ S.CardStatus = styled.p`
 
 S.Box = styled.div`
   ${display}
+
+  * + * {
+    margin-top: 10px;
+  }
 `;
 
 class Card extends Component {

@@ -10,6 +10,7 @@ import starIcon from "../assets/star.svg";
 const S = {};
 S.Dashboard = styled.section`
   display: flex;
+  margin: -2px;
   margin-bottom: 36px;
 `;
 

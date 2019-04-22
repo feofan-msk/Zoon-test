@@ -3,21 +3,22 @@ import styled from "styled-components";
 
 const S = {};
 S.Card = styled.div`
-  flex: 1 1 25%;
+  flex: 0 0 calc(25% - 4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 2px;
+  padding: 20px;
+  padding-right: 80px;
 
-  padding: 16px 14px 16px 26px;
   border-radius: 4px;
   background-color: #4a0594;
   background-image: ${props => `url(${props.background})`};
   background-repeat: no-repeat;
   background-position: top 18px right 18px;
   color: #ffffff;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   cursor: pointer;
-
-  & + & {
-    margin-left: 5px;
-  }
 `;
 
 S.Title = styled.h4`
